@@ -7,11 +7,10 @@ import lombok.*;
 @Table(name = "ativo")
 @Inheritance(strategy = InheritanceType.JOINED)
 @AllArgsConstructor @NoArgsConstructor @Getter @Setter
-@Builder
 public abstract class Ativo {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(nullable = false, unique = true)

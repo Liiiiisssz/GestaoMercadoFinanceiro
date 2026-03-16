@@ -19,10 +19,11 @@ public class RendaFixa extends Ativo{
 
     private String indexador;
 
-    public RendaFixa(Long id, String ticker, String nome, Double valorAtual, LocalDate dataVencimento, String indexador) {
+    public RendaFixa(Long id, String ticker, String nome, Double valorAtual, LocalDate dataVencimento, String indexador, Double taxaContratada) {
         super(id, ticker, nome, valorAtual);
         this.dataVencimento = dataVencimento;
         this.indexador = indexador;
+        this.taxaContratada = taxaContratada;
     }
 
     public RendaFixa(LocalDate dataVencimento, Double taxaContratada, String indexador) {

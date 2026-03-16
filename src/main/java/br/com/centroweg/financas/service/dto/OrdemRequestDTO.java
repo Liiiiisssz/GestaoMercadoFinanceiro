@@ -1,8 +1,9 @@
 package br.com.centroweg.financas.service.dto;
 
-public record InvestimentoRequestDTO(
+public record OrdemRequestDTO(
         Long investidorId,
         String tickerAtivo,
-        Double quantidadde
+        Double quantidade,
+        String tipoOperacao
 ) {
 }
