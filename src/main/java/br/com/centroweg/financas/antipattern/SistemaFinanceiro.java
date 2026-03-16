@@ -264,7 +264,7 @@ public class SistemaFinanceiro {
 
         }
 
-        else if (total > 10000) {
+        else if (total  > 10000) {
 
             System.out.println("Perfil: INVESTIDOR MÉDIO");
 
