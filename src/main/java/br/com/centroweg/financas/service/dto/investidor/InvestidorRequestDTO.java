@@ -1,4 +1,4 @@
-package br.com.centroweg.financas.service.dto;
+package br.com.centroweg.financas.service.dto.investidor;
 
 public record InvestidorRequestDTO(
         String nome,

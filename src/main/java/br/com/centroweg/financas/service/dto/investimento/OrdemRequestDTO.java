@@ -1,4 +1,4 @@
-package br.com.centroweg.financas.service.dto;
+package br.com.centroweg.financas.service.dto.investimento;
 
 public record OrdemRequestDTO(
         Long investidorId,
