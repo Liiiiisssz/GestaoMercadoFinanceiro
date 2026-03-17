@@ -9,7 +9,7 @@ import lombok.Setter;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "renda_fixo")
+@Table(name = "renda_fixa")
 @NoArgsConstructor @Getter @Setter
 public class RendaFixa extends Ativo{
 
