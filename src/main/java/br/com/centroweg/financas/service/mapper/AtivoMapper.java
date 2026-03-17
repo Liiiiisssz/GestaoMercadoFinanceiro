@@ -30,7 +30,7 @@ public class AtivoMapper {
 
     public List<AtivoResponseDTO> toDTOList(List<Ativo> ativos){
         return ativos.stream()
-                .map(this::toDTO)
+                .map(ativo -> this.toDTO(ativo, 0.0))
                 .collect(Collectors.toList());
     }
 }
