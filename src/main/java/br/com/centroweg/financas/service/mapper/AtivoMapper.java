@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 @Component
 public class AtivoMapper {
 
-    public AtivoResponseDTO toDTO(Ativo ativo){
+    public AtivoResponseDTO toDTO(Ativo ativo, Double impostoCalculado){
         if(ativo == null) return null;
 
         return new AtivoResponseDTO(
@@ -23,7 +23,8 @@ public class AtivoMapper {
                 ativo.getClass().getSimpleName(),
                 ativo.calcularRisco(),
                 (ativo instanceof Acao a) ? a.getSetor() : null,
-                (ativo instanceof RendaFixa r) ? r.getIndexador() : null
+                (ativo instanceof RendaFixa r) ? r.getIndexador() : null,
+                impostoCalculado
         );
     }
 

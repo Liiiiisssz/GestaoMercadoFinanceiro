@@ -8,6 +8,7 @@ public record AtivoResponseDTO(
         String tipo,
         Double risco,
         String setor,
-        String indexador
+        String indexador,
+        Double impostoEstimado
 ) {
 }
