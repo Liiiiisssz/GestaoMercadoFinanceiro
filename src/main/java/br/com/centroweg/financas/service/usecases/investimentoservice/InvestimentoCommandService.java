@@ -6,6 +6,7 @@ import br.com.centroweg.financas.infra.repository.investidores.InvestidorReposit
 import br.com.centroweg.financas.infra.repository.investimento.OrdemInvestimentoRepository;
 import br.com.centroweg.financas.service.dto.investidor.InvestidorResponseDTO;
 import br.com.centroweg.financas.service.mapper.InvestidorMapper;
+import br.com.centroweg.financas.service.mapper.InvestimentoMapper;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -15,29 +16,15 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class InvestimentoCommandService {
 
-    private final InvestidorRepository repository;
-    private final InvestidorMapper mapper;
-    private final OrdemInvestimentoRepository ordemInvestimentoRepository;
+    private final OrdemInvestimentoRepository ordemRepository;
+    private final InvestidorRepository investidorRepository;
 
 @Transactional
-public InvestidorResponseDTO SaveNewInvestidor(Investidor investidor){
-    return mapper.toDTO(repository.save(investidor));
+    public OrdemInvestimento salvarOrdem(OrdemInvestimento investimento){
+    return ordemRepository.save(investimento);
 }
-
     @Transactional
     public void atualizarSaldo(Investidor investidor) {
-        repository.save(investidor);
-    }
-
-    @Transactional
-    public OrdemInvestimento salvarOrdem(OrdemInvestimento ordem) {
-        return ordemInvestimentoRepository.save(ordem);
-    }
-    @Transactional
-    public void deletar(Long id) {
-        if (!repository.existsById(id)) {
-            throw new EntityNotFoundException("Investidor não encontrado com ID: " + id);
-        }
-        repository.deleteById(id);
+        investidorRepository.save(investidor);
     }
 }

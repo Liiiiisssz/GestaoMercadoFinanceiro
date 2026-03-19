@@ -10,6 +10,7 @@ import br.com.centroweg.financas.service.dto.investimento.InvestimentoResponseDT
 import br.com.centroweg.financas.service.mapper.InvestimentoMapper;
 import br.com.centroweg.financas.service.usecases.ativoservice.AtivoQueryService;
 import br.com.centroweg.financas.service.usecases.ativoservice.ImpostoResolverService;
+import br.com.centroweg.financas.service.usecases.investidorservice.InvestidorQueryService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -21,7 +22,7 @@ import java.time.LocalDateTime;
 @RequiredArgsConstructor
 public class InvestimentoService {
 
-    private final InvestimentoQueryService queryService;
+    private final InvestidorQueryService queryService;
     private final AtivoQueryService ativoQueryService;
     private final InvestimentoCommandService commandService;
     private final ImpostoResolverService impostoResolver;
