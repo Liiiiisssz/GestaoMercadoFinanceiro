@@ -10,17 +10,17 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "ordem_investimento")
-@Getter @Setter @NoArgsConstructor @AllArgsConstructor @Builder
+@Getter @Setter @NoArgsConstructor @AllArgsConstructor
 public class OrdemInvestimento {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Investidor investidor;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Ativo ativo;
 
     private Double quantidade;
@@ -29,6 +29,8 @@ public class OrdemInvestimento {
 
     @Enumerated(EnumType.STRING)
     private TipoOperacao tipo;
+
+    private BigDecimal imposto;
 
     private LocalDateTime dataHora;
 }
