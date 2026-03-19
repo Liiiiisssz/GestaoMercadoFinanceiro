@@ -1,8 +1,10 @@
 package br.com.centroweg.financas.service.dto.investimento;
 
+import java.math.BigDecimal;
+
 public record InvestimentoRequestDTO(
         Long investidorId,
-        String tickerAtivo,
-        Double quantidadde
+        Long ativoId,
+        BigDecimal valor
 ) {
 }

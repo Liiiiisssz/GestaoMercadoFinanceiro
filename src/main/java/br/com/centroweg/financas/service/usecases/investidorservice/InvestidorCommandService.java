@@ -10,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
+
 @Service
 @RequiredArgsConstructor
 public class InvestidorCommandService {
@@ -31,7 +33,7 @@ public class InvestidorCommandService {
     }
 
     @Transactional
-    public InvestidorResponseDTO atualizarSaldo(Long id, Double novoSaldo) {
+    public InvestidorResponseDTO atualizarSaldo(Long id, BigDecimal novoSaldo) {
         Investidor investidor = buscarOuLancar(id);
         investidor.setSaldo(novoSaldo);
         return mapper.toDTO(repository.save(investidor));

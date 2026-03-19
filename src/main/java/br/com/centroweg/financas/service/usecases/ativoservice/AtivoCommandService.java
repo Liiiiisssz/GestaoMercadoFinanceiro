@@ -8,6 +8,8 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+
 @Service
 @RequiredArgsConstructor
 public class AtivoCommandService {
@@ -18,8 +20,6 @@ public class AtivoCommandService {
         @Transactional
         public AtivoResponseDTO save(Ativo ativo){
             Ativo salvo =  repository.save(ativo);
-            return mapper.toDTO(salvo,0.0);
+            return mapper.toDTO(salvo, BigDecimal.ZERO);
         }
-
-
 }

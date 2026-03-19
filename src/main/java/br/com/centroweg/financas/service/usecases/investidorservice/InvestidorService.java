@@ -5,6 +5,7 @@ import br.com.centroweg.financas.service.dto.investidor.InvestidorResponseDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -26,7 +27,7 @@ private final InvestidorCommandService commandService;
         return queryService.buscarPorNome(nome);
     }
 
-    public List<InvestidorResponseDTO> buscarPorSaldoMinimo(Double saldo) {
+    public List<InvestidorResponseDTO> buscarPorSaldoMinimo(BigDecimal saldo) {
         return queryService.buscarPorSaldoMinimo(saldo);
     }
 
@@ -38,7 +39,7 @@ private final InvestidorCommandService commandService;
         return commandService.atualizarNome(id, novoNome);
     }
 
-    public InvestidorResponseDTO atualizarSaldo(Long id, Double novoSaldo) {
+    public InvestidorResponseDTO atualizarSaldo(Long id, BigDecimal novoSaldo) {
         return commandService.atualizarSaldo(id, novoSaldo);
     }
 

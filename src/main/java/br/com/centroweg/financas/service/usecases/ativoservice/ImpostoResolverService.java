@@ -5,22 +5,20 @@ import br.com.centroweg.financas.domain.interfaces.CalculoImpostoStrategy;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class ImpostoResolverService {
 
-
     private final List<CalculoImpostoStrategy> strategies;
 
-    public Double calcularImpostoInterno(Ativo ativo, Double valorInvestido){
+    public BigDecimal calcularImpostoInterno(Ativo ativo, BigDecimal valorInvestido){
         return strategies.stream()
                 .filter(strategy -> strategy.isAplicavel(ativo))
                 .findFirst()
                 .map(strategy -> strategy.calcular(valorInvestido))
-                .orElse(0.0);
+                .orElse(BigDecimal.ZERO);
     }
-
-
 }

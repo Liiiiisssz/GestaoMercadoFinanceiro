@@ -4,13 +4,14 @@ import br.com.centroweg.financas.domain.entities.ativo.Ativo;
 import br.com.centroweg.financas.service.dto.ativo.AtivoResponseDTO;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
 public class AtivoMapper {
 
-    public AtivoResponseDTO toDTO(Ativo ativo, Double impostoCalculado){
+    public AtivoResponseDTO toDTO(Ativo ativo, BigDecimal impostoCalculado){
         if(ativo == null) return null;
 
         return new AtivoResponseDTO(
@@ -27,7 +28,7 @@ public class AtivoMapper {
 
     public List<AtivoResponseDTO> toDTOList(List<Ativo> ativos){
         return ativos.stream()
-                .map(ativo -> this.toDTO(ativo, 0.0))
+                .map(ativo -> this.toDTO(ativo, BigDecimal.valueOf(0.0)))
                 .collect(Collectors.toList());
     }
 }

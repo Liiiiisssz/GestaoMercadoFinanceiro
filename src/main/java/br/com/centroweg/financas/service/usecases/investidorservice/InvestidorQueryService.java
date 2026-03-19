@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -31,7 +32,7 @@ public class InvestidorQueryService {
         return mapper.toDTOList(repository.findByNomeContainingIgnoreCase(nome));
     }
 
-    public List<InvestidorResponseDTO> buscarPorSaldoMinimo(Double saldo) {
+    public List<InvestidorResponseDTO> buscarPorSaldoMinimo(BigDecimal saldo) {
         return mapper.toDTOList(repository.findBySaldoGreaterThanEqual(saldo));
     }
 

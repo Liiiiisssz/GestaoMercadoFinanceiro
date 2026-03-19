@@ -9,7 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -20,17 +20,14 @@ public class InvestimentoQueryService {
     private final InvestidorMapper mapper;
     private final InvestidorRepository repository;
 
-
     public List<InvestidorResponseDTO> ListAll(){
         return repository.findAll().stream().map(mapper::toDTO).toList();
-
     }
-
     public List<InvestidorResponseDTO> ListByName(String nome){
         return repository.findByNomeContainingIgnoreCase(nome).stream()
                 .map(mapper::toDTO).toList();
     }
-    public List<InvestidorResponseDTO> buscarPorSaldoMinimo(Double saldo) {
+    public List<InvestidorResponseDTO> buscarPorSaldoMinimo(BigDecimal saldo) {
         return repository.findBySaldoGreaterThanEqual(saldo).stream()
                 .map(mapper::toDTO)
                 .toList();
@@ -39,6 +36,4 @@ public class InvestimentoQueryService {
         return repository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Investidor não encontrado com ID: " + id));
     }
-
-
 }

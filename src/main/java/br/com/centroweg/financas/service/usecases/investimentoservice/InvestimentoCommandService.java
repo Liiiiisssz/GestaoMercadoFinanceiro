@@ -4,11 +4,9 @@ import br.com.centroweg.financas.domain.entities.investidores.Investidor;
 import br.com.centroweg.financas.domain.entities.investimento.OrdemInvestimento;
 import br.com.centroweg.financas.infra.repository.investidores.InvestidorRepository;
 import br.com.centroweg.financas.infra.repository.investimento.OrdemInvestimentoRepository;
-import br.com.centroweg.financas.service.dto.investidor.InvestidorRequestDTO;
 import br.com.centroweg.financas.service.dto.investidor.InvestidorResponseDTO;
 import br.com.centroweg.financas.service.mapper.InvestidorMapper;
 import jakarta.persistence.EntityNotFoundException;
-import jakarta.transaction.TransactionScoped;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -20,7 +18,6 @@ public class InvestimentoCommandService {
     private final InvestidorRepository repository;
     private final InvestidorMapper mapper;
     private final OrdemInvestimentoRepository ordemInvestimentoRepository;
-
 
 @Transactional
 public InvestidorResponseDTO SaveNewInvestidor(Investidor investidor){
@@ -43,5 +40,4 @@ public InvestidorResponseDTO SaveNewInvestidor(Investidor investidor){
         }
         repository.deleteById(id);
     }
-
 }
