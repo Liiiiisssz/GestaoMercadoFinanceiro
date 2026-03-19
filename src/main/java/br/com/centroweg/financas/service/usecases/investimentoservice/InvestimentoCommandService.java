@@ -1,7 +1,9 @@
 package br.com.centroweg.financas.service.usecases.investimentoservice;
 
 import br.com.centroweg.financas.domain.entities.investidores.Investidor;
+import br.com.centroweg.financas.domain.entities.investimento.OrdemInvestimento;
 import br.com.centroweg.financas.infra.repository.investidores.InvestidorRepository;
+import br.com.centroweg.financas.infra.repository.investimento.OrdemInvestimentoRepository;
 import br.com.centroweg.financas.service.dto.investidor.InvestidorRequestDTO;
 import br.com.centroweg.financas.service.dto.investidor.InvestidorResponseDTO;
 import br.com.centroweg.financas.service.mapper.InvestidorMapper;
@@ -17,21 +19,23 @@ public class InvestimentoCommandService {
 
     private final InvestidorRepository repository;
     private final InvestidorMapper mapper;
+    private final OrdemInvestimentoRepository ordemInvestimentoRepository;
 
 
 @Transactional
-public InvestidorResponseDTO SaveNewInvestidor(InvestidorRequestDTO request){
-    Investidor investidor = mapper.toEntity(request);
+public InvestidorResponseDTO SaveNewInvestidor(Investidor investidor){
     return mapper.toDTO(repository.save(investidor));
 }
 
-@Transactional
-    public InvestidorResponseDTO PutBalance(Long id, Double novoSaldo){
-    Investidor investidor = repository.findById(id).orElseThrow( () -> new EntityNotFoundException("Investidor nao encontrado"));
+    @Transactional
+    public void atualizarSaldo(Investidor investidor) {
+        repository.save(investidor);
+    }
 
-    investidor.setSaldo(novoSaldo);
-    return mapper.toDTO(repository.save(investidor));
-}
+    @Transactional
+    public OrdemInvestimento salvarOrdem(OrdemInvestimento ordem) {
+        return ordemInvestimentoRepository.save(ordem);
+    }
     @Transactional
     public void deletar(Long id) {
         if (!repository.existsById(id)) {
