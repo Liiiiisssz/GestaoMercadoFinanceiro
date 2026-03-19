@@ -7,6 +7,5 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 @Repository
 public interface AtivoRepository extends JpaRepository<Ativo,Long> {
-
     Optional<Ativo> findByTicker(String ticker);
-    }
+}

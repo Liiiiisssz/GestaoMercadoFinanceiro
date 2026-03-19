@@ -7,7 +7,6 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface RendaFixaRepository extends JpaRepository<RendaFixa,Long> {
-
     List<RendaFixa> findByDataVencimentoAfter(LocalDate data);
     List<RendaFixa> findByIndexador(String indexador);
 }

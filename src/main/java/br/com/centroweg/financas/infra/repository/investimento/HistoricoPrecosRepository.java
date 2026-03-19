@@ -9,8 +9,6 @@ import java.util.List;
 
 @Repository
 public interface HistoricoPrecosRepository extends JpaRepository<HistoricoPrecos, Long> {
-
     List<HistoricoPrecos> findByAtivoIdOrderByDataRegistroDesc(Long ativoId);
-
     List<HistoricoPrecos> findByDataRegistroBetween(LocalDateTime inicio, LocalDateTime fim);
 }

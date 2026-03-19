@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
@@ -22,7 +23,7 @@ public class HistoricoPrecos {
     @JoinColumn(name = "ativo_id")
     private Ativo ativo;
 
-    private Double preco;
+    private BigDecimal preco;
 
     private LocalDateTime dataRegistro;
 }

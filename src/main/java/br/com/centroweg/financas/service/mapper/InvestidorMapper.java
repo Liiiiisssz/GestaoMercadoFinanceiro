@@ -8,19 +8,23 @@ import br.com.centroweg.financas.service.dto.investidor.InvestidorResponseDTO;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Map;
+import java.util.function.Supplier;
 
 @Component
 public class InvestidorMapper {
 
+    private final Map<String, Supplier<Investidor>> types = Map.of(
+            "QUALIFICADO", InvestidorQualificado::new,
+            "COMUM", InvestidorComum::new
+    );
     public Investidor toEntity(InvestidorRequestDTO dto){
         if(dto == null) return null;
 
-        Investidor investidor;
-        if("QUALIFICADO".equalsIgnoreCase(dto.tipo())){
-            investidor = new InvestidorQualificado();
-        } else {
-            investidor = new InvestidorComum();
-        }
+        Investidor investidor = types.getOrDefault(
+                dto.tipo().toUpperCase(),
+                InvestidorComum::new)
+                .get();
 
         investidor.setNome(dto.nome());
         investidor.setSaldo(dto.saldoInicial());

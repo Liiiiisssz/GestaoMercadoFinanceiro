@@ -3,6 +3,8 @@ package br.com.centroweg.financas.domain.entities.ativo;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.math.BigDecimal;
+
 @Entity
 @Table(name = "ativo")
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -18,7 +20,21 @@ public abstract class Ativo {
 
     private String nome;
 
-    private Double valorAtual;
+    private BigDecimal valorAtual;
 
-    public abstract double calcularRisco();
+    public abstract String getInformacaoAdicional();
+    public abstract boolean restrito();
+    public abstract Double calcularRisco();
+
+    public Ativo(String ticker, String nome, BigDecimal valorAtual) {
+        this.ticker = ticker;
+        this.nome = nome;
+        this.valorAtual = valorAtual;
+    }
+    public Ativo(Long id, String ticker, String nome, BigDecimal valorAtual) {
+        this.id = id;
+        this.ticker = ticker;
+        this.nome = nome;
+        this.valorAtual = valorAtual;
+    }
 }

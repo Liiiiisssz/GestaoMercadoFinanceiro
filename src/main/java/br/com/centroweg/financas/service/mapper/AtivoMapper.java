@@ -1,8 +1,6 @@
 package br.com.centroweg.financas.service.mapper;
 
-import br.com.centroweg.financas.domain.entities.ativo.Acao;
 import br.com.centroweg.financas.domain.entities.ativo.Ativo;
-import br.com.centroweg.financas.domain.entities.ativo.RendaFixa;
 import br.com.centroweg.financas.service.dto.ativo.AtivoResponseDTO;
 import org.springframework.stereotype.Component;
 
@@ -22,8 +20,7 @@ public class AtivoMapper {
                 ativo.getValorAtual(),
                 ativo.getClass().getSimpleName(),
                 ativo.calcularRisco(),
-                (ativo instanceof Acao a) ? a.getSetor() : null,
-                (ativo instanceof RendaFixa r) ? r.getIndexador() : null,
+                ativo.getInformacaoAdicional(),
                 impostoCalculado
         );
     }

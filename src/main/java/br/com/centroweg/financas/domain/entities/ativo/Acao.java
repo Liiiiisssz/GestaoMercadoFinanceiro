@@ -2,10 +2,11 @@ package br.com.centroweg.financas.domain.entities.ativo;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.math.BigDecimal;
 
 @Entity
 @Table(name = "acao")
@@ -14,13 +15,27 @@ public class Acao extends Ativo{
 
     private String setor;
 
-    public Acao(String ticker, String nome, double valor, String setor){
-        super(null, ticker, nome, valor);
+    public Acao(String ticker, String nome, BigDecimal valor, String setor){
+        super(ticker, nome, valor);
+        this.setor = setor;
+    }
+    public Acao(Long id, String ticker, String nome, BigDecimal valor, String setor) {
+        super(id, ticker, nome, valor);
         this.setor = setor;
     }
 
     @Override
-    public double calcularRisco() {
+    public String getInformacaoAdicional() {
+        return this.setor;
+    }
+
+    @Override
+    public boolean restrito() {
+        return true;
+    }
+
+    @Override
+    public Double calcularRisco() {
         return 5.0;
     }
 }

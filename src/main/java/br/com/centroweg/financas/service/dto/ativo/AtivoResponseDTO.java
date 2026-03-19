@@ -1,14 +1,15 @@
 package br.com.centroweg.financas.service.dto.ativo;
 
+import java.math.BigDecimal;
+
 public record AtivoResponseDTO(
         Long id,
         String ticker,
         String nome,
-        Double valorAtual,
+        BigDecimal valorAtual,
         String tipo,
         Double risco,
-        String setor,
-        String indexador,
+        String detalhesAtivo,
         Double impostoEstimado
 ) {
 }

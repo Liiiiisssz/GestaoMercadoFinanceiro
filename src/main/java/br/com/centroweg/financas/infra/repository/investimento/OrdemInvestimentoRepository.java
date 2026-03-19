@@ -9,10 +9,7 @@ import java.util.List;
 
 @Repository
 public interface OrdemInvestimentoRepository extends JpaRepository<OrdemInvestimento, Long> {
-
     List<OrdemInvestimento> findByInvestidorId(Long investidorId);
-
     List<OrdemInvestimento> findByInvestidorIdAndAtivoId(Long investidorId, Long ativoId);
-
     List<OrdemInvestimento> findByTipo(TipoOperacao tipo);
 }

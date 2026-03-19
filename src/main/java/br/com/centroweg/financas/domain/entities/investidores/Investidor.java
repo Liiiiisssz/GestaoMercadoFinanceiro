@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal;
+
 @Entity
 @Table(name = "investidor")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
@@ -20,7 +22,7 @@ public abstract class Investidor {
 
     private String nome;
 
-    private Double saldo;
+    private BigDecimal saldo;
 
     public abstract boolean podeInvestir(Ativo ativo);
 }

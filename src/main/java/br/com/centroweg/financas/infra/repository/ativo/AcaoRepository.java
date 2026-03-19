@@ -7,6 +7,5 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 @Repository
 public interface AcaoRepository extends JpaRepository<Acao,Long> {
-
         List<Acao>findBySetor(String setor);
 }

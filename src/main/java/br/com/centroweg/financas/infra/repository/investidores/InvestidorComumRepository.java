@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface InvestidorComunRepository extends JpaRepository<InvestidorComum, Long> {
+public interface InvestidorComumRepository extends JpaRepository<InvestidorComum, Long> {
     Optional<InvestidorComum> findByNome(String nome);
 }

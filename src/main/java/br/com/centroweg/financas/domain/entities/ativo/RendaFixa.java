@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Entity
@@ -19,7 +20,7 @@ public class RendaFixa extends Ativo{
 
     private String indexador;
 
-    public RendaFixa(Long id, String ticker, String nome, Double valorAtual, LocalDate dataVencimento, String indexador, Double taxaContratada) {
+    public RendaFixa(Long id, String ticker, String nome, BigDecimal valorAtual, LocalDate dataVencimento, String indexador, Double taxaContratada) {
         super(id, ticker, nome, valorAtual);
         this.dataVencimento = dataVencimento;
         this.indexador = indexador;
@@ -33,7 +34,17 @@ public class RendaFixa extends Ativo{
     }
 
     @Override
-    public double calcularRisco() {
+    public String getInformacaoAdicional() {
+        return this.indexador;
+    }
+
+    @Override
+    public boolean restrito() {
+        return false;
+    }
+
+    @Override
+    public Double calcularRisco() {
         return dataVencimento.isAfter(LocalDate.now().plusYears(5)) ? 2.0 : 1.0;
     }
 }

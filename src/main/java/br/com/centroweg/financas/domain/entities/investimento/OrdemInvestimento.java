@@ -5,6 +5,7 @@ import br.com.centroweg.financas.domain.entities.investidores.Investidor;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
@@ -24,7 +25,7 @@ public class OrdemInvestimento {
 
     private Double quantidade;
 
-    private Double precoExecucao;
+    private BigDecimal precoExecucao;
 
     @Enumerated(EnumType.STRING)
     private TipoOperacao tipo;
