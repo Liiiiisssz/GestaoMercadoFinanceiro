@@ -3,7 +3,7 @@ package br.com.centroweg.financas.service.usecases.ativo;
 import br.com.centroweg.financas.domain.entities.ativo.Ativo;
 import br.com.centroweg.financas.infra.repository.ativo.AtivoRepository;
 import br.com.centroweg.financas.service.dto.ativo.AtivoResponseDTO;
-import br.com.centroweg.financas.service.mapper.AtivoMapper;
+import br.com.centroweg.financas.service.mapper.ativo.AtivoMapper;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

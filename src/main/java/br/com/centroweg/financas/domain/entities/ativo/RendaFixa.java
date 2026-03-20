@@ -35,12 +35,6 @@ public class RendaFixa extends Ativo{
     }
 
     @Override
-    public void configurar(AtivoRequestDTO dto){
-        super.configurar(dto);
-        this.dataVencimento = dto.dataVencimento();
-    }
-
-    @Override
     public String getInformacaoAdicional() {
         return this.indexador;
     }

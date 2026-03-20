@@ -26,11 +26,6 @@ public class Acao extends Ativo{
     }
 
     @Override
-    public void configurar(AtivoRequestDTO dto){
-        super.configurar(dto);
-    }
-
-    @Override
     public String getInformacaoAdicional() {
         return this.setor;
     }
