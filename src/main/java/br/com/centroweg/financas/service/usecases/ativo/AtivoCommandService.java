@@ -1,4 +1,4 @@
-package br.com.centroweg.financas.service.usecases.ativoservice;
+package br.com.centroweg.financas.service.usecases.ativo;
 
 import br.com.centroweg.financas.domain.entities.ativo.Ativo;
 import br.com.centroweg.financas.infra.repository.ativo.AtivoRepository;
@@ -17,10 +17,12 @@ public class AtivoCommandService {
 
         private final AtivoRepository repository;
         private final AtivoMapper mapper;
+        private final ImpostoResolverService impostoResolver;
 
         @Transactional
         public AtivoResponseDTO save(AtivoRequestDTO dto){
             Ativo salvo = repository.save(mapper.toEntity(dto));
-            return mapper.toDTO(salvo, BigDecimal.ZERO);
+            BigDecimal imposto = impostoResolver.calcularImpostoInterno(salvo, dto.valorAtual());
+            return mapper.toDTO(salvo, imposto);
         }
 }

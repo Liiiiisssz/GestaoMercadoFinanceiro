@@ -1,10 +1,10 @@
-package br.com.centroweg.financas.presentation.controller;
+package br.com.centroweg.financas.web;
 
 import br.com.centroweg.financas.domain.entities.investimento.TipoOperacao;
 import br.com.centroweg.financas.service.dto.investimento.InvestimentoRequestDTO;
 import br.com.centroweg.financas.service.dto.investimento.InvestimentoResponseDTO;
-import br.com.centroweg.financas.service.usecases.investimentoservice.InvestimentoQueryService;
-import br.com.centroweg.financas.service.usecases.investimentoservice.InvestimentoService;
+import br.com.centroweg.financas.service.usecases.investimento.InvestimentoQueryService;
+import br.com.centroweg.financas.service.usecases.investimento.InvestimentoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -34,9 +34,9 @@ public class InvestimentoController {
 
     @GetMapping("/investidor/{investidorId}/ativo/{ativoId}")
     public ResponseEntity<List<InvestimentoResponseDTO>> listarPorInvestidorEAtivo(
-            @PathVariable Long investidoId,
+            @PathVariable Long investidorId,
             @PathVariable Long ativoId){
-        return ResponseEntity.ok(queryService.listarPorInvestidorEAtivo(investidoId, ativoId));
+        return ResponseEntity.ok(queryService.listarPorInvestidorEAtivo(investidorId, ativoId));
     }
 
     @GetMapping("/tipo/{tipo}")

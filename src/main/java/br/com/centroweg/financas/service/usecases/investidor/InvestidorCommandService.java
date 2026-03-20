@@ -1,4 +1,4 @@
-package br.com.centroweg.financas.service.usecases.investidorservice;
+package br.com.centroweg.financas.service.usecases.investidor;
 
 import br.com.centroweg.financas.domain.entities.investidores.Investidor;
 import br.com.centroweg.financas.infra.repository.investidores.InvestidorRepository;
@@ -37,11 +37,6 @@ public class InvestidorCommandService {
         Investidor investidor = buscarOuLancar(id);
         investidor.setSaldo(novoSaldo);
         return mapper.toDTO(repository.save(investidor));
-    }
-
-    @Transactional
-    public void persistirSaldoAtualizado(Investidor investidor) {
-        repository.save(investidor);
     }
 
     @Transactional

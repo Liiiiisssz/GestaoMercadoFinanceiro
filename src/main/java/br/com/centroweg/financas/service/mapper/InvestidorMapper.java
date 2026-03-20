@@ -21,13 +21,14 @@ public class InvestidorMapper {
     public Investidor toEntity(InvestidorRequestDTO dto){
         if(dto == null) return null;
 
-        Investidor investidor = types.getOrDefault(
-                dto.tipo().toUpperCase(),
-                InvestidorComum::new)
-                .get();
+        String tipoInformado = (dto.tipo() == null) ? "COMUM" : dto.tipo().toUpperCase();
 
+        if(!types.containsKey(tipoInformado)){
+            throw new IllegalArgumentException("Tipo de investidor inválido");
+        }
+        Investidor investidor = types.get(tipoInformado).get();
         investidor.setNome(dto.nome());
-        investidor.setSaldo(dto.saldoInicial());
+        investidor.setSaldo(dto.saldo());
         return investidor;
     }
 

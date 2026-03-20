@@ -1,4 +1,4 @@
-package br.com.centroweg.financas.service.usecases.investidorservice;
+package br.com.centroweg.financas.service.usecases.investidor;
 
 import br.com.centroweg.financas.service.dto.investidor.InvestidorRequestDTO;
 import br.com.centroweg.financas.service.dto.investidor.InvestidorResponseDTO;

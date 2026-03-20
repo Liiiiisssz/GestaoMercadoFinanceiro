@@ -1,5 +1,6 @@
 package br.com.centroweg.financas.domain.entities.ativo;
 
+import br.com.centroweg.financas.service.dto.ativo.AtivoRequestDTO;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import lombok.Getter;
@@ -34,6 +35,12 @@ public class RendaFixa extends Ativo{
     }
 
     @Override
+    public void configurar(AtivoRequestDTO dto){
+        super.configurar(dto);
+        this.dataVencimento = dto.dataVencimento();
+    }
+
+    @Override
     public String getInformacaoAdicional() {
         return this.indexador;
     }
@@ -45,6 +52,6 @@ public class RendaFixa extends Ativo{
 
     @Override
     public Double calcularRisco() {
-        return dataVencimento.isAfter(LocalDate.now().plusYears(5)) ? 2.0 : 1.0;
+        return (dataVencimento != null && dataVencimento.isAfter(LocalDate.now())) ? 1.0 : 5.0;
     }
 }

@@ -9,7 +9,6 @@ public record AtivoResponseDTO(
         BigDecimal valorAtual,
         String tipo,
         Double risco,
-        String detalhesAtivo,
         BigDecimal impostoEstimado
 ) {
 }

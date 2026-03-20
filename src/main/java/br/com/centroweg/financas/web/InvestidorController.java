@@ -1,8 +1,8 @@
-package br.com.centroweg.financas.presentation.controller;
+package br.com.centroweg.financas.web;
 
 import br.com.centroweg.financas.service.dto.investidor.InvestidorRequestDTO;
 import br.com.centroweg.financas.service.dto.investidor.InvestidorResponseDTO;
-import br.com.centroweg.financas.service.usecases.investidorservice.InvestidorService;
+import br.com.centroweg.financas.service.usecases.investidor.InvestidorService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -51,15 +51,15 @@ public class InvestidorController {
     @PatchMapping("/{id}/nome")
     public ResponseEntity<InvestidorResponseDTO> atualizarNome(
             @PathVariable Long id,
-            @RequestBody String novoNome){
-        return ResponseEntity.ok(investidorService.atualizarNome(id, novoNome));
+            @RequestBody InvestidorRequestDTO dto){
+        return ResponseEntity.ok(investidorService.atualizarNome(id, dto.nome()));
     }
 
     @PatchMapping("/{id}/saldo")
     public ResponseEntity<InvestidorResponseDTO> atualizarSaldo(
             @PathVariable Long id,
-            @RequestParam BigDecimal novoSaldo){
-        return ResponseEntity.ok(investidorService.atualizarSaldo(id, novoSaldo));
+            @RequestParam BigDecimal saldo){
+        return ResponseEntity.ok(investidorService.atualizarSaldo(id, saldo));
     }
 
     @DeleteMapping("/{id}")

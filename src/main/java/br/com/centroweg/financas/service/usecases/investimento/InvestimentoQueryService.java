@@ -1,4 +1,4 @@
-package br.com.centroweg.financas.service.usecases.investimentoservice;
+package br.com.centroweg.financas.service.usecases.investimento;
 
 import br.com.centroweg.financas.domain.entities.investimento.OrdemInvestimento;
 import br.com.centroweg.financas.domain.entities.investimento.TipoOperacao;
@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -24,17 +25,26 @@ public class InvestimentoQueryService {
 
     public List<InvestimentoResponseDTO> listarPorInvestidor(Long investidorId) {
         return repository.findByInvestidorId(investidorId).stream()
-                .map(o -> mapper.toResponse(o,o.getImposto()))
+                .map(o -> {
+                    BigDecimal impostoCalculado = o.getPrecoExecucao().multiply(new BigDecimal("0.15"));
+                    return mapper.toResponse(o, impostoCalculado);
+                })
                 .toList();
     }
     public List<InvestimentoResponseDTO> listarPorInvestidorEAtivo(Long investidorId, Long ativoId) {
         return repository.findByInvestidorIdAndAtivoId(investidorId, ativoId).stream()
-                .map(o -> mapper.toResponse(o, o.getImposto()))
+                .map(o -> {
+                    BigDecimal impostoCalculado = o.getPrecoExecucao().multiply(new BigDecimal("0.15"));
+                    return mapper.toResponse(o, impostoCalculado);
+                })
                 .toList();
     }
     public List<InvestimentoResponseDTO> listarPorTipoOperacao(TipoOperacao tipo) {
         return repository.findByTipo(tipo).stream()
-                .map(o -> mapper.toResponse(o, o.getImposto()))
+                .map(o -> {
+                    BigDecimal impostoCalculado = o.getPrecoExecucao().multiply(new BigDecimal("0.15"));
+                    return mapper.toResponse(o, impostoCalculado);
+                })
                 .toList();
     }
     public OrdemInvestimento buscaEntidadePorID(Long id){

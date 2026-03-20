@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 public record InvestidorRequestDTO(
         String nome,
         String cpf,
-        BigDecimal saldoInicial,
+        BigDecimal saldo,
         String tipo
 ) {
 }

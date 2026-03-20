@@ -1,4 +1,4 @@
-package br.com.centroweg.financas.service.usecases.ativoservice;
+package br.com.centroweg.financas.service.usecases.ativo;
 
 import br.com.centroweg.financas.domain.entities.ativo.Ativo;
 import br.com.centroweg.financas.domain.interfaces.CalculoImpostoStrategy;

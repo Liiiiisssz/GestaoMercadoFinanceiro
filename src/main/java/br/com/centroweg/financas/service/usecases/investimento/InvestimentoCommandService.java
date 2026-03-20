@@ -1,4 +1,4 @@
-package br.com.centroweg.financas.service.usecases.investimentoservice;
+package br.com.centroweg.financas.service.usecases.investimento;
 
 import br.com.centroweg.financas.domain.entities.investidores.Investidor;
 import br.com.centroweg.financas.domain.entities.investimento.OrdemInvestimento;

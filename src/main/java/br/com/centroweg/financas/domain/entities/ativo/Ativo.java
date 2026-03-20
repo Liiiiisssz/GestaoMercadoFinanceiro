@@ -1,5 +1,6 @@
 package br.com.centroweg.financas.domain.entities.ativo;
 
+import br.com.centroweg.financas.service.dto.ativo.AtivoRequestDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -26,6 +27,11 @@ public abstract class Ativo {
     public abstract boolean restrito();
     public abstract Double calcularRisco();
 
+    public void configurar(AtivoRequestDTO dto){
+        this.ticker = dto.ticker();
+        this.nome = dto.nome();
+        this.valorAtual = dto.valorAtual();
+    }
     public Ativo(String ticker, String nome, BigDecimal valorAtual) {
         this.ticker = ticker;
         this.nome = nome;

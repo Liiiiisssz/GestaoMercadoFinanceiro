@@ -48,7 +48,6 @@ public class AtivoMapper {
                 ativo.getValorAtual(),
                 ativo.getClass().getSimpleName(),
                 ativo.calcularRisco(),
-                ativo.getInformacaoAdicional(),
                 impostoCalculado
         );
     }

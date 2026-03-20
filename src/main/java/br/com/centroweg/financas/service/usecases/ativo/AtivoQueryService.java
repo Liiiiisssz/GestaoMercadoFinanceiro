@@ -1,4 +1,4 @@
-package br.com.centroweg.financas.service.usecases.ativoservice;
+package br.com.centroweg.financas.service.usecases.ativo;
 
 import br.com.centroweg.financas.domain.entities.ativo.Ativo;
 import br.com.centroweg.financas.infra.repository.ativo.AtivoRepository;
@@ -23,7 +23,10 @@ public class AtivoQueryService {
 
     public List<AtivoResponseDTO> listarTodos() {
         return repository.findAll().stream()
-                .map(ativo -> mapper.toDTO(ativo, BigDecimal.ZERO))
+                .map(ativo -> {
+                    BigDecimal imposto = impostoResolver.calcularImpostoInterno(ativo, ativo.getValorAtual());
+                    return mapper.toDTO(ativo, imposto);
+                })
                 .toList();
     }
 

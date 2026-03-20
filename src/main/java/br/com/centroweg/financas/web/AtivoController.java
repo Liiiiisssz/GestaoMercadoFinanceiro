@@ -1,10 +1,9 @@
-package br.com.centroweg.financas.presentation.controller;
+package br.com.centroweg.financas.web;
 
-import br.com.centroweg.financas.domain.entities.ativo.Ativo;
 import br.com.centroweg.financas.service.dto.ativo.AtivoRequestDTO;
 import br.com.centroweg.financas.service.dto.ativo.AtivoResponseDTO;
-import br.com.centroweg.financas.service.usecases.ativoservice.AtivoCommandService;
-import br.com.centroweg.financas.service.usecases.ativoservice.AtivoQueryService;
+import br.com.centroweg.financas.service.usecases.ativo.AtivoCommandService;
+import br.com.centroweg.financas.service.usecases.ativo.AtivoQueryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,4 +1,4 @@
-package br.com.centroweg.financas.service.usecases.investimentoservice;
+package br.com.centroweg.financas.service.usecases.investimento;
 
 import br.com.centroweg.financas.domain.entities.ativo.Ativo;
 import br.com.centroweg.financas.domain.entities.investidores.Investidor;
@@ -8,9 +8,9 @@ import br.com.centroweg.financas.domain.exceptions.RegraDeNegocioException;
 import br.com.centroweg.financas.service.dto.investimento.InvestimentoRequestDTO;
 import br.com.centroweg.financas.service.dto.investimento.InvestimentoResponseDTO;
 import br.com.centroweg.financas.service.mapper.InvestimentoMapper;
-import br.com.centroweg.financas.service.usecases.ativoservice.AtivoQueryService;
-import br.com.centroweg.financas.service.usecases.ativoservice.ImpostoResolverService;
-import br.com.centroweg.financas.service.usecases.investidorservice.InvestidorQueryService;
+import br.com.centroweg.financas.service.usecases.ativo.AtivoQueryService;
+import br.com.centroweg.financas.service.usecases.ativo.ImpostoResolverService;
+import br.com.centroweg.financas.service.usecases.investidor.InvestidorQueryService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
