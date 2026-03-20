@@ -1,6 +1,7 @@
 package br.com.centroweg.financas.presentation.controller;
 
 import br.com.centroweg.financas.domain.entities.ativo.Ativo;
+import br.com.centroweg.financas.service.dto.ativo.AtivoRequestDTO;
 import br.com.centroweg.financas.service.dto.ativo.AtivoResponseDTO;
 import br.com.centroweg.financas.service.usecases.ativoservice.AtivoCommandService;
 import br.com.centroweg.financas.service.usecases.ativoservice.AtivoQueryService;
@@ -33,8 +34,8 @@ public class AtivoController {
     }
 
     @PostMapping
-    public ResponseEntity<AtivoResponseDTO> salvar(@RequestBody Ativo ativo){
-        AtivoResponseDTO salvo = commandService.save(ativo);
+    public ResponseEntity<AtivoResponseDTO> salvar(@RequestBody AtivoRequestDTO dto){
+        AtivoResponseDTO salvo = commandService.save(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(salvo);
     }
 }
