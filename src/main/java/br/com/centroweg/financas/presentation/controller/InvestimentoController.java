@@ -36,7 +36,7 @@ public class InvestimentoController {
     public ResponseEntity<List<InvestimentoResponseDTO>> listarPorInvestidorEAtivo(
             @PathVariable Long investidoId,
             @PathVariable Long ativoId){
-        return ResponseEntity.ok(queryService.listarPorInvestidorEAtivo(investidoId, ativoId))
+        return ResponseEntity.ok(queryService.listarPorInvestidorEAtivo(investidoId, ativoId));
     }
 
     @GetMapping("/tipo/{tipo}")

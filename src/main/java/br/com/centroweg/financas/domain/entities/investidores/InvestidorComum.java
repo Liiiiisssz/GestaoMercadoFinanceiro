@@ -1,6 +1,5 @@
 package br.com.centroweg.financas.domain.entities.investidores;
 
-import br.com.centroweg.financas.domain.entities.ativo.Acao;
 import br.com.centroweg.financas.domain.entities.ativo.Ativo;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;

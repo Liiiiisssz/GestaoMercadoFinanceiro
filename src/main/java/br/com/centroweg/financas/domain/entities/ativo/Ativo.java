@@ -31,10 +31,4 @@ public abstract class Ativo {
         this.nome = nome;
         this.valorAtual = valorAtual;
     }
-    public Ativo(Long id, String ticker, String nome, BigDecimal valorAtual) {
-        this.id = id;
-        this.ticker = ticker;
-        this.nome = nome;
-        this.valorAtual = valorAtual;
-    }
 }

@@ -5,11 +5,13 @@ import br.com.centroweg.financas.domain.entities.ativo.Ativo;
 import br.com.centroweg.financas.domain.interfaces.CalculoImpostoStrategy;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
+
 @Component
 public class ImpostoAcaoStrategy implements CalculoImpostoStrategy {
     @Override
-    public Double calcular(Double valor) {
-        return valor * 0.15;
+    public BigDecimal calcular(BigDecimal valor) {
+        return valor.multiply(new BigDecimal("0.15"));
     }
 
     @Override
