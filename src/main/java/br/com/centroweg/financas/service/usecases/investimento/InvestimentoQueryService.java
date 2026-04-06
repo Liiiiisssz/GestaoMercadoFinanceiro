@@ -5,6 +5,7 @@ import br.com.centroweg.financas.domain.entities.investimento.TipoOperacao;
 import br.com.centroweg.financas.infra.repository.investimento.OrdemInvestimentoRepository;
 import br.com.centroweg.financas.service.dto.investimento.InvestimentoResponseDTO;
 import br.com.centroweg.financas.service.mapper.InvestimentoMapper;
+import br.com.centroweg.financas.service.usecases.ativo.ImpostoResolverService;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -21,30 +22,22 @@ public class InvestimentoQueryService {
 
     private final OrdemInvestimentoRepository repository;
     private final InvestimentoMapper mapper;
+    private final ImpostoResolverService impostoResolver;
 
 
     public List<InvestimentoResponseDTO> listarPorInvestidor(Long investidorId) {
         return repository.findByInvestidorId(investidorId).stream()
-                .map(o -> {
-                    BigDecimal impostoCalculado = o.getPrecoExecucao().multiply(new BigDecimal("0.15"));
-                    return mapper.toResponse(o, impostoCalculado);
-                })
+                .map(this::mapearParaResponse)
                 .toList();
     }
     public List<InvestimentoResponseDTO> listarPorInvestidorEAtivo(Long investidorId, Long ativoId) {
         return repository.findByInvestidorIdAndAtivoId(investidorId, ativoId).stream()
-                .map(o -> {
-                    BigDecimal impostoCalculado = o.getPrecoExecucao().multiply(new BigDecimal("0.15"));
-                    return mapper.toResponse(o, impostoCalculado);
-                })
+                .map(this::mapearParaResponse)
                 .toList();
     }
     public List<InvestimentoResponseDTO> listarPorTipoOperacao(TipoOperacao tipo) {
         return repository.findByTipo(tipo).stream()
-                .map(o -> {
-                    BigDecimal impostoCalculado = o.getPrecoExecucao().multiply(new BigDecimal("0.15"));
-                    return mapper.toResponse(o, impostoCalculado);
-                })
+                .map(this::mapearParaResponse)
                 .toList();
     }
     public OrdemInvestimento buscaEntidadePorID(Long id){
@@ -54,6 +47,11 @@ public class InvestimentoQueryService {
 
     public InvestimentoResponseDTO buscarOrdemDTOPorId(Long id){
         OrdemInvestimento ordem = buscaEntidadePorID(id);
-        return mapper.toResponse(ordem, ordem.getImposto());
+        return mapearParaResponse(ordem);
+    }
+
+    private InvestimentoResponseDTO mapearParaResponse(OrdemInvestimento ordem){
+        BigDecimal imposto = impostoResolver.calcularImpostoInterno(ordem.getAtivo(), ordem.getPrecoExecucao());
+        return mapper.toResponse(ordem, imposto);
     }
 }
