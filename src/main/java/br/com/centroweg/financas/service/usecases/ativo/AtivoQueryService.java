@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -27,6 +28,14 @@ public class AtivoQueryService {
                     BigDecimal imposto = impostoResolver.calcularImpostoInterno(ativo, ativo.getValorAtual());
                     return mapper.toDTO(ativo, imposto);
                 })
+                .toList();
+    }
+
+    public List<String> listarTiposDisponiveis() {
+        return Arrays.stream(AtivoResponseDTO.class.getPermittedSubclasses())
+                .map(Class::getSimpleName)
+                .map(nome -> nome.replace("ResponseDTO", ""))
+                .map(nome -> nome.replaceAll("([a-z])([A-Z]+)", "$1_$2").toUpperCase())
                 .toList();
     }
 

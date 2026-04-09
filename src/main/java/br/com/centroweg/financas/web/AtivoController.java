@@ -32,6 +32,12 @@ public class AtivoController {
         return ResponseEntity.ok(queryService.buscarPorTicker(ticker, valorSimulado));
     }
 
+    @CrossOrigin(origins = "*")
+    @GetMapping("/tipos")
+    public ResponseEntity<List<String>> listarTipos() {
+        return ResponseEntity.ok(queryService.listarTiposDisponiveis());
+    }
+
     @PostMapping
     public ResponseEntity<AtivoResponseDTO> salvar(@RequestBody AtivoRequestDTO dto){
         AtivoResponseDTO salvo = commandService.save(dto);
