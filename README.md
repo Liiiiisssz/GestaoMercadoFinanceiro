@@ -1,4 +1,4 @@
-# 💰 Sistema Financeiro - Refatoração com SOLID e Strategy
+# 💰 API de Investimentos - Refatoração com SOLID e Strategy
 
 ## 📌 Sobre o Projeto
 Este projeto demonstra a evolução de um sistema financeiro que inicialmente possuía um código monolítico, rígido e 
