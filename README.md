@@ -172,6 +172,105 @@ Código limpo, extensível, fácil manutenção e sem condicionais complexas.
 
 ---
 
+## 🏛️ Arquiteturas do Sistema
+
+### 1️⃣ Entidades e Herança
+
+```
+                           Ativo «abstract»
+                       id, ticker, nome, valorAtual
+                                 ↑
+                    ┌────────────┴────────────┐
+                    ↑                         ↑
+                  Acao                   RendaFixa
+            setor · risco = 5.0    dataVencimento, taxa, indexador
+              restrito = true
+
+
+                         Investidor «abstract»
+                      id, nome, saldo · SINGLE_TABLE
+                                 ↑
+                    ┌────────────┴────────────┐
+                    ↑                         ↑
+             InvestidorComum           InvestidorQualificado
+      (valida restrições de risco)   (sem restrições)
+```
+
+**Hierarquia de Ativo e Investidor:**
+- **Ativo**: Classe abstrata representando qualquer ativo financeiro
+  - **Acao**: Ação com setor, risco e restrição
+  - **RendaFixa**: Investimento com data de vencimento, taxa e indexador
+
+- **Investidor**: Classe abstrata representando qualquer investidor
+  - **InvestidorComum**: Não pode investir em ativos restritos
+  - **InvestidorQualificado**: Pode investir em qualquer ativo
+
+---
+
+### 2️⃣ Relacionamentos de Investimento
+
+```
+    Investidor                OrdemInvestimento                Ativo
+       N:1  ←─────────────────┤    N:1    ├──────────────→  N:1
+             (investidor)          (ativo)
+
+    
+                               HistoricoPrecos
+                          preco, dataRegistro
+                                    N:1
+                           (relacionamento com Ativo)
+```
+
+**Relacionamentos:**
+- **OrdemInvestimento → Investidor** (N:1): Muitas ordens de um investidor
+- **OrdemInvestimento → Ativo** (N:1): Muitas ordens de um mesmo ativo
+  - Campos: quantidade, precoExecucao, tipo (COMPRA/VENDA), dataHora
+
+- **HistoricoPrecos → Ativo** (N:1): Histórico de preços para cada ativo
+  - Campos: preco, dataRegistro
+
+---
+
+### 3️⃣ Camadas da Aplicação
+
+```
+┌─────────────────────────────────────────────────────────┐
+│                    🌐 WEB (Controllers)                 │
+│                                                         │
+│  AtivoController  │  InvestidorController  │  InvestimentoController
+└─────────────────────────────────────────────────────────┘
+                            ↓
+┌─────────────────────────────────────────────────────────┐
+│              🔧 SERVICE (Use Cases + Mappers)           │
+│                                                         │
+│  Use Cases:                        Mappers:            │
+│  ├─ AtivoCommandService            ├─ AtivoMapper +    │
+│  ├─ AtivoQueryService              │  strategies      │
+│  ├─ InvestidorCommandService       ├─ InvestidorMapper│
+│  ├─ InvestidorQueryService         └─ InvestimentoMapper
+│  └─ InvestimentoService                                │
+│     + InvestimentoCommandService                       │
+└─────────────────────────────────────────────────────────┘
+                            ↓
+┌─────────────────────────────────────────────────────────┐
+│         🗄️  INFRA (Repositories + Strategies)          │
+│                                                         │
+│  Repositories:              Strategies:                │
+│  ├─ AtivoRepository         ├─ ImpostoAcaoStrategy    │
+│  ├─ InvestidorRepository    │  (15% de imposto)       │
+│  ├─ HistoricoPrecosRepository                          │
+│  └─ OrdemInvestimentoRepository  └─ ImpostoRendaFixaStrategy
+│                                    (5% de imposto)     │
+└─────────────────────────────────────────────────────────┘
+```
+
+**Fluxo de Dados:**
+1. **Web**: Controllers recebem requisições HTTP
+2. **Service**: Business logic, validações e orquestração
+3. **Infra**: Persistência e estratégias de cálculo
+
+---
+
 ## 🔄 Fluxo do Sistema
 
 ### 📌 Cadastro de Ativo
