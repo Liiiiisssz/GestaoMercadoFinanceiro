@@ -57,7 +57,6 @@ public class SistemaFinanceiro {
 
                 Investimento inv = new Investimento(ativo, tipoInvestimento, valor, tipoInvestidor);
                 bancoMemoria.add(inv);
-                salvarNoBanco(inv);
 
                 enviarEmail("Novo investimento realizado em " + ativo);
             }
@@ -150,30 +149,6 @@ public class SistemaFinanceiro {
             else if (opcao == 6) {
                 break;
             }
-        }
-    }
-
-    public static void salvarNoBanco(Investimento inv) {
-
-        try {
-            Connection conn = DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3306/fintech",
-                    "root",
-                    "123456"
-            );
-
-            Statement stmt = conn.createStatement();
-            stmt.executeUpdate(
-                    "INSERT INTO investimentos VALUES('"
-                            + inv.ativo + "','"
-                            + inv.tipoInvestimento + "',"
-                            + inv.valor + ",'"
-                            + inv.tipoInvestidor + "')"
-            );
-            conn.close();
-        }
-        catch (Exception e) {
-            System.out.println("Erro ao salvar no banco.");
         }
     }
 
