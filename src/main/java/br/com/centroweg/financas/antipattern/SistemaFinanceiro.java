@@ -9,7 +9,6 @@ import java.util.Scanner;
 
 public class SistemaFinanceiro {
 
-    // "Entidade" misturada na mesma classe
     static class Investimento {
 
         String ativo;
@@ -28,7 +27,6 @@ public class SistemaFinanceiro {
     static List<Investimento> bancoMemoria = new ArrayList<>();
 
     public static void main(String[] args) {
-
         Scanner sc = new Scanner(System.in);
 
         while (true) {
@@ -58,13 +56,10 @@ public class SistemaFinanceiro {
                 String tipoInvestidor = sc.next();
 
                 Investimento inv = new Investimento(ativo, tipoInvestimento, valor, tipoInvestidor);
-
                 bancoMemoria.add(inv);
-
                 salvarNoBanco(inv);
 
                 enviarEmail("Novo investimento realizado em " + ativo);
-
             }
 
             else if (opcao == 2) {
@@ -90,47 +85,34 @@ public class SistemaFinanceiro {
                         if (inv.tipoInvestimento.equals("ACAO")) {
                             imposto = inv.valor * 0.15;
                         }
-
                         else if (inv.tipoInvestimento.equals("CRIPTO")) {
                             imposto = inv.valor * 0.20;
                         }
-
                         else if (inv.tipoInvestimento.equals("FII")) {
                             imposto = inv.valor * 0.18;
                         }
-
                         else {
                             imposto = inv.valor * 0.10;
                         }
-
                     }
-
                     else if (inv.tipoInvestidor.equals("PJ")) {
 
                         if (inv.tipoInvestimento.equals("ACAO")) {
                             imposto = inv.valor * 0.18;
                         }
-
                         else if (inv.tipoInvestimento.equals("CRIPTO")) {
                             imposto = inv.valor * 0.25;
                         }
-
                         else {
                             imposto = inv.valor * 0.15;
                         }
-
                     }
-
                     else if (inv.tipoInvestidor.equals("DAYTRADER")) {
-
                         imposto = inv.valor * 0.30;
-
                     }
 
                     else if (inv.tipoInvestidor.equals("APOSENTADO")) {
-
                         imposto = inv.valor * 0.08;
-
                     }
 
                     else if (inv.tipoInvestidor.equals("EMPRESA_TECH")) {
@@ -138,30 +120,21 @@ public class SistemaFinanceiro {
                         if (inv.tipoInvestimento.equals("STARTUP")) {
                             imposto = inv.valor * 0.12;
                         }
-
                         else {
                             imposto = inv.valor * 0.20;
                         }
-
                     }
-
                     else if (inv.tipoInvestidor.equals("GLOBAL")) {
-
                         imposto = inv.valor * 0.22;
-
                     }
-
                     System.out.println(
                             "Imposto para "
                                     + inv.ativo
                                     + " (" + inv.tipoInvestimento + ") = "
                                     + imposto
                     );
-
                 }
-
             }
-
             else if (opcao == 4) {
 
                 System.out.println("Digite a mensagem:");
@@ -170,30 +143,19 @@ public class SistemaFinanceiro {
                 enviarEmail(msg);
                 enviarSMS(msg);
                 enviarWebhook(msg);
-
             }
-
             else if (opcao == 5) {
-
                 gerarRelatorioCompleto();
-
             }
-
             else if (opcao == 6) {
-
                 break;
-
             }
-
         }
-
     }
 
-    // conexão hardcoded
     public static void salvarNoBanco(Investimento inv) {
 
         try {
-
             Connection conn = DriverManager.getConnection(
                     "jdbc:mysql://localhost:3306/fintech",
                     "root",
@@ -201,7 +163,6 @@ public class SistemaFinanceiro {
             );
 
             Statement stmt = conn.createStatement();
-
             stmt.executeUpdate(
                     "INSERT INTO investimentos VALUES('"
                             + inv.ativo + "','"
@@ -209,74 +170,47 @@ public class SistemaFinanceiro {
                             + inv.valor + ",'"
                             + inv.tipoInvestidor + "')"
             );
-
             conn.close();
-
         }
-
         catch (Exception e) {
-
             System.out.println("Erro ao salvar no banco.");
-
         }
-
     }
 
     public static void enviarEmail(String msg) {
-
         System.out.println("EMAIL enviado: " + msg);
-
     }
 
     public static void enviarSMS(String msg) {
-
         System.out.println("SMS enviado: " + msg);
-
     }
 
     public static void enviarWebhook(String msg) {
-
         System.out.println("Webhook enviado: " + msg);
-
     }
 
     public static void gerarRelatorioCompleto() {
-
         double total = 0;
 
         int quantidade = bancoMemoria.size();
 
         for (Investimento inv : bancoMemoria) {
-
             total += inv.valor;
-
         }
 
         System.out.println("\n===== RELATÓRIO =====");
-
         System.out.println("Quantidade investimentos: " + quantidade);
-
         System.out.println("Total investido: " + total);
 
         if (total > 50000) {
-
             System.out.println("Perfil: INVESTIDOR ALTO PATRIMÔNIO");
-
         }
-
         else if (total  > 10000) {
-
             System.out.println("Perfil: INVESTIDOR MÉDIO");
-
         }
-
         else {
-
             System.out.println("Perfil: INVESTIDOR INICIANTE");
-
         }
-
     }
-
 }
 
